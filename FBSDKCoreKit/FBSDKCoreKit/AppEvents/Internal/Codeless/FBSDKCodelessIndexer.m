@@ -250,18 +250,18 @@ static id<FBSDKSettings> _settings;
 
 + (void)setupGesture
 {
-  _isGestureSet = YES;
-  [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
-  Class class = [UIApplication class];
-
-  [self.swizzler swizzleSelector:@selector(motionBegan:withEvent:)
-                         onClass:class
-                       withBlock:^{
-                         if ([FBSDKServerConfigurationManager cachedServerConfiguration].isCodelessEventsEnabled) {
-                           [self checkCodelessIndexingSession];
-                         }
-                       }
-                           named:@"motionBegan"];
+//  _isGestureSet = YES;
+//  [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
+//  Class class = [UIApplication class];
+//
+//  [self.swizzler swizzleSelector:@selector(motionBegan:withEvent:)
+//                         onClass:class
+//                       withBlock:^{
+//                         if ([FBSDKServerConfigurationManager cachedServerConfiguration].isCodelessEventsEnabled) {
+//                           [self checkCodelessIndexingSession];
+//                         }
+//                       }
+//                           named:@"motionBegan"];
 }
 
 + (void)checkCodelessIndexingSession
@@ -347,9 +347,9 @@ static id<FBSDKSettings> _settings;
     return;
   }
 
-  if (UIApplicationStateActive != [UIApplication sharedApplication].applicationState) {
-    return;
-  }
+//  if (UIApplicationStateActive != [UIApplication sharedApplication].applicationState) {
+//    return;
+//  }
 
   // If userAgentSuffix begins with Unity, trigger unity code to upload view hierarchy
   NSString *userAgentSuffix = [FBSDKSettings userAgentSuffix];
@@ -423,20 +423,20 @@ static id<FBSDKSettings> _settings;
 {
   NSMutableArray *trees = [NSMutableArray array];
 
-  NSArray *windows = [UIApplication sharedApplication].windows;
-  for (UIWindow *window in windows) {
-    NSDictionary *tree = [FBSDKViewHierarchy recursiveCaptureTreeWithCurrentNode:window
-                                                                      targetNode:nil
-                                                                   objAddressSet:nil
-                                                                            hash:YES];
-    if (tree) {
-      if (window.isKeyWindow) {
-        [trees insertObject:tree atIndex:0];
-      } else {
-        [FBSDKTypeUtility array:trees addObject:tree];
-      }
-    }
-  }
+//  NSArray *windows = [UIApplication sharedApplication].windows;
+//  for (UIWindow *window in windows) {
+//    NSDictionary *tree = [FBSDKViewHierarchy recursiveCaptureTreeWithCurrentNode:window
+//                                                                      targetNode:nil
+//                                                                   objAddressSet:nil
+//                                                                            hash:YES];
+//    if (tree) {
+//      if (window.isKeyWindow) {
+//        [trees insertObject:tree atIndex:0];
+//      } else {
+//        [FBSDKTypeUtility array:trees addObject:tree];
+//      }
+//    }
+//  }
 
   if (0 == trees.count) {
     return nil;

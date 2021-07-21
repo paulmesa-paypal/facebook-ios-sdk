@@ -357,8 +357,9 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
   NSURLComponents *components = [NSURLComponents new];
   components.scheme = [scheme stringByAppendingString:minimumVersion];
   components.path = @"/";
-  return ([[UIApplication sharedApplication] canOpenURL:components.URL]
-    || [self _canUseFBShareSheet]);
+//  return ([[UIApplication sharedApplication] canOpenURL:components.URL]
+//    || [self _canUseFBShareSheet]);
+  return NO;
 }
 
 - (BOOL)_canUseFBShareSheet
@@ -367,7 +368,8 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
   NSURLComponents *components = [NSURLComponents new];
   components.scheme = FBSDK_CANOPENURL_SHARE_EXTENSION;
   components.path = @"/";
-  return [[UIApplication sharedApplication] canOpenURL:components.URL];
+//  return [[UIApplication sharedApplication] canOpenURL:components.URL];
+  return NO;
 }
 
 - (BOOL)_canUseQuoteInShareSheet
@@ -387,7 +389,8 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
   NSURLComponents *components = [NSURLComponents new];
   components.scheme = [scheme stringByAppendingString:minimumVersion];
   components.path = @"/";
-  return [[UIApplication sharedApplication] canOpenURL:components.URL];
+//  return [[UIApplication sharedApplication] canOpenURL:components.URL];
+  return NO;
 }
 
 - (void)_cleanUpWebDialog

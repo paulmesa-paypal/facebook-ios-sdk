@@ -183,10 +183,10 @@ static dispatch_once_t setupNonce;
 
 - (void)rematchBindings
 {
-  NSArray *windows = [UIApplication sharedApplication].windows;
-  for (UIWindow *window in windows) {
-    [self matchSubviewsIn:window];
-  }
+//  NSArray *windows = [UIApplication sharedApplication].windows;
+//  for (UIWindow *window in windows) {
+//    [self matchSubviewsIn:window];
+//  }
 }
 
 - (void)matchSubviewsIn:(UIView *)view
@@ -251,65 +251,65 @@ static dispatch_once_t setupNonce;
 
 - (void)predictEventWithUIResponder:(UIResponder *)uiResponder text:(NSString *)text
 {
-  if (text.length > 100 || text.length == 0 || [FBSDKAppEventsUtility isSensitiveUserData:text]) {
-    return;
-  }
-
-  NSMutableArray<NSDictionary<NSString *, id> *> *trees = [NSMutableArray array];
-
-  fb_dispatch_on_main_thread(^{
-    NSMutableSet<NSObject *> *objAddressSet = [NSMutableSet set];
-    NSArray<UIWindow *> *windows = [UIApplication sharedApplication].windows;
-    for (UIWindow *window in windows) {
-      NSDictionary<NSString *, id> *tree = [FBSDKViewHierarchy recursiveCaptureTreeWithCurrentNode:window
-                                                                                        targetNode:uiResponder
-                                                                                     objAddressSet:objAddressSet
-                                                                                              hash:NO];
-      if (tree) {
-        if (window.isKeyWindow) {
-          [trees insertObject:tree atIndex:0];
-        } else {
-          [FBSDKTypeUtility array:trees addObject:tree];
-        }
-      }
-    }
-    NSMutableDictionary<NSString *, id> *viewTree = [NSMutableDictionary dictionary];
-
-    NSString *screenName = nil;
-    UIViewController *topMostViewController = [FBSDKInternalUtility.sharedUtility topMostViewController];
-    if (topMostViewController) {
-      screenName = NSStringFromClass([topMostViewController class]);
-    }
-
-    [FBSDKTypeUtility dictionary:viewTree setObject:trees forKey:VIEW_HIERARCHY_VIEW_KEY];
-    [FBSDKTypeUtility dictionary:viewTree setObject:screenName ?: @"" forKey:VIEW_HIERARCHY_SCREEN_NAME_KEY];
-
-    __weak typeof(self) weakSelf = self;
-    dispatch_block_t predictAndLogBlock = ^{
-      NSMutableDictionary<NSString *, id> *viewTreeCopy = [viewTree mutableCopy];
-      float *denseData = [weakSelf.featureExtractor getDenseFeatures:viewTree];
-      NSString *textFeature = [FBSDKModelUtility normalizedText:[FBSDKFeatureExtractor getTextFeature:text withScreenName:viewTreeCopy[@"screenname"]]];
-      NSString *event = [weakSelf.eventProcessor processSuggestedEvents:textFeature denseData:denseData];
-      if (!event || [event isEqualToString:SUGGESTED_EVENT_OTHER]) {
-        return;
-      }
-      if ([weakSelf.optInEvents containsObject:event]) {
-        [weakSelf.eventLogger logEvent:event
-                            parameters:@{@"_is_suggested_event" : @"1",
-                                         @"_button_text" : text}];
-      } else if ([weakSelf.unconfirmedEvents containsObject:event] && denseData) {
-        // Only send back not confirmed events to advertisers
-        [weakSelf logSuggestedEvent:event text:text denseFeature:[self getDenseFeaure:denseData] ?: @""];
-      }
-      free(denseData);
-    };
-
-  #ifdef FBSDKTEST
-    predictAndLogBlock();
-  #else
-    fb_dispatch_on_default_thread(predictAndLogBlock);
-  #endif
-  });
+//  if (text.length > 100 || text.length == 0 || [FBSDKAppEventsUtility isSensitiveUserData:text]) {
+//    return;
+//  }
+//
+//  NSMutableArray<NSDictionary<NSString *, id> *> *trees = [NSMutableArray array];
+//
+//  fb_dispatch_on_main_thread(^{
+//    NSMutableSet<NSObject *> *objAddressSet = [NSMutableSet set];
+//    NSArray<UIWindow *> *windows = [UIApplication sharedApplication].windows;
+//    for (UIWindow *window in windows) {
+//      NSDictionary<NSString *, id> *tree = [FBSDKViewHierarchy recursiveCaptureTreeWithCurrentNode:window
+//                                                                                        targetNode:uiResponder
+//                                                                                     objAddressSet:objAddressSet
+//                                                                                              hash:NO];
+//      if (tree) {
+//        if (window.isKeyWindow) {
+//          [trees insertObject:tree atIndex:0];
+//        } else {
+//          [FBSDKTypeUtility array:trees addObject:tree];
+//        }
+//      }
+//    }
+//    NSMutableDictionary<NSString *, id> *viewTree = [NSMutableDictionary dictionary];
+//
+//    NSString *screenName = nil;
+//    UIViewController *topMostViewController = [FBSDKInternalUtility.sharedUtility topMostViewController];
+//    if (topMostViewController) {
+//      screenName = NSStringFromClass([topMostViewController class]);
+//    }
+//
+//    [FBSDKTypeUtility dictionary:viewTree setObject:trees forKey:VIEW_HIERARCHY_VIEW_KEY];
+//    [FBSDKTypeUtility dictionary:viewTree setObject:screenName ?: @"" forKey:VIEW_HIERARCHY_SCREEN_NAME_KEY];
+//
+//    __weak typeof(self) weakSelf = self;
+//    dispatch_block_t predictAndLogBlock = ^{
+//      NSMutableDictionary<NSString *, id> *viewTreeCopy = [viewTree mutableCopy];
+//      float *denseData = [weakSelf.featureExtractor getDenseFeatures:viewTree];
+//      NSString *textFeature = [FBSDKModelUtility normalizedText:[FBSDKFeatureExtractor getTextFeature:text withScreenName:viewTreeCopy[@"screenname"]]];
+//      NSString *event = [weakSelf.eventProcessor processSuggestedEvents:textFeature denseData:denseData];
+//      if (!event || [event isEqualToString:SUGGESTED_EVENT_OTHER]) {
+//        return;
+//      }
+//      if ([weakSelf.optInEvents containsObject:event]) {
+//        [weakSelf.eventLogger logEvent:event
+//                            parameters:@{@"_is_suggested_event" : @"1",
+//                                         @"_button_text" : text}];
+//      } else if ([weakSelf.unconfirmedEvents containsObject:event] && denseData) {
+//        // Only send back not confirmed events to advertisers
+//        [weakSelf logSuggestedEvent:event text:text denseFeature:[self getDenseFeaure:denseData] ?: @""];
+//      }
+//      free(denseData);
+//    };
+//
+//  #ifdef FBSDKTEST
+//    predictAndLogBlock();
+//  #else
+//    fb_dispatch_on_default_thread(predictAndLogBlock);
+//  #endif
+//  });
 }
 
  #pragma mark - Helper Methods

@@ -1426,22 +1426,22 @@ static id<FBSDKAppEventsParameterProcessing, FBSDKEventsProcessing> g_restrictiv
 
   NSString *currentViewControllerName;
   UIApplicationState applicationState;
-  if ([NSThread isMainThread]) {
-    // We only collect the view controller when on the main thread, as the behavior off
-    // the main thread is unpredictable.  Besides, UI state for off-main-thread computations
-    // isn't really relevant anyhow.
-    UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    vc = vc.presentedViewController ?: vc;
-    if (vc) {
-      currentViewControllerName = [[vc class] description];
-    } else {
-      currentViewControllerName = @"no_ui";
-    }
-    applicationState = [UIApplication sharedApplication].applicationState;
-  } else {
+//  if ([NSThread isMainThread]) {
+//    // We only collect the view controller when on the main thread, as the behavior off
+//    // the main thread is unpredictable.  Besides, UI state for off-main-thread computations
+//    // isn't really relevant anyhow.
+//    UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+//    vc = vc.presentedViewController ?: vc;
+//    if (vc) {
+//      currentViewControllerName = [[vc class] description];
+//    } else {
+//      currentViewControllerName = @"no_ui";
+//    }
+//    applicationState = [UIApplication sharedApplication].applicationState;
+//  } else {
     currentViewControllerName = @"off_thread";
     applicationState = self.applicationState;
-  }
+//  }
   [FBSDKTypeUtility dictionary:eventDictionary setObject:currentViewControllerName forKey:@"_ui"];
 
   if (applicationState == UIApplicationStateBackground) {

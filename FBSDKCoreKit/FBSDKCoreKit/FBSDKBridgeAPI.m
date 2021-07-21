@@ -94,14 +94,14 @@ typedef NS_ENUM(NSUInteger, FBSDKAuthenticationSession) {
 {
   static FBSDKBridgeAPI *_sharedInstance;
   static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    _sharedInstance = [[self alloc] initWithProcessInfo:NSProcessInfo.processInfo
-                                                 logger:[[FBSDKLogger alloc] initWithLoggingBehavior:FBSDKLoggingBehaviorDeveloperErrors]
-                                              urlOpener:UIApplication.sharedApplication
-                               bridgeAPIResponseFactory:[FBSDKBridgeAPIResponseFactory new]
-                                        frameworkLoader:FBSDKDynamicFrameworkLoader.shared
-                                   appURLSchemeProvider:FBSDKInternalUtility.sharedUtility];
-  });
+//  dispatch_once(&onceToken, ^{
+//    _sharedInstance = [[self alloc] initWithProcessInfo:NSProcessInfo.processInfo
+//                                                 logger:[[FBSDKLogger alloc] initWithLoggingBehavior:FBSDKLoggingBehaviorDeveloperErrors]
+//                                              urlOpener:UIApplication.sharedApplication
+//                               bridgeAPIResponseFactory:[FBSDKBridgeAPIResponseFactory new]
+//                                        frameworkLoader:FBSDKDynamicFrameworkLoader.shared
+//                                   appURLSchemeProvider:FBSDKInternalUtility.sharedUtility];
+//  });
   return _sharedInstance;
 }
 
@@ -468,9 +468,9 @@ typedef NS_ENUM(NSUInteger, FBSDKAuthenticationSession) {
     FBSDKBridgeAPI *strongSelf = weakSelf;
     BOOL didSucceed = (error == nil && aURL != nil);
     handler(didSucceed, error);
-    if (didSucceed) {
-      [strongSelf application:[UIApplication sharedApplication] openURL:aURL sourceApplication:@"com.apple" annotation:nil];
-    }
+//    if (didSucceed) {
+//      [strongSelf application:[UIApplication sharedApplication] openURL:aURL sourceApplication:@"com.apple" annotation:nil];
+//    }
     strongSelf->_authenticationSession = nil;
     strongSelf->_authenticationSessionCompletionHandler = nil;
     strongSelf->_authenticationSessionState = FBSDKAuthenticationSessionNone;
@@ -572,7 +572,7 @@ typedef NS_ENUM(NSUInteger, FBSDKAuthenticationSession) {
  #else
 - (UIWindow *)presentationAnchorForWebAuthenticationSession:(id<FBSDKAuthenticationSession>)session API_AVAILABLE(ios(11.0)) {
 #endif
-  return UIApplication.sharedApplication.keyWindow;
+//  return UIApplication.sharedApplication.keyWindow;
 }
  #pragma clang diagnostic pop
 

@@ -88,10 +88,10 @@ static dispatch_once_t token;
     _notificationObserver = notificationObserver;
     _tokenWallet = tokenWallet;
 
-    [self.notificationObserver addObserver:self
-                                  selector:@selector(_applicationDidEnterBackgroundNotification:)
-                                      name:UIApplicationDidEnterBackgroundNotification
-                                    object:UIApplication.sharedApplication];
+//    [self.notificationObserver addObserver:self
+//                                  selector:@selector(_applicationDidEnterBackgroundNotification:)
+//                                      name:UIApplicationDidEnterBackgroundNotification
+//                                    object:UIApplication.sharedApplication];
   }
   return self;
 }

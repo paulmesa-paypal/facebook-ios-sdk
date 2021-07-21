@@ -147,9 +147,9 @@ NSString *const FBSDKBridgeAPIVersionKey = @"version";
   NSURLComponents *components = [NSURLComponents new];
   components.scheme = scheme;
   components.path = @"/";
-  if ([[UIApplication sharedApplication] canOpenURL:components.URL]) {
-    return protocol;
-  }
+//  if ([[UIApplication sharedApplication] canOpenURL:components.URL]) {
+//    return protocol;
+//  }
   return nil;
 }
 

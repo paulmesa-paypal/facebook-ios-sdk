@@ -447,23 +447,24 @@ static NSMapTable *_transientObjects;
 
 - (BOOL)_canOpenURLScheme:(NSString *)scheme
 {
-  scheme = [FBSDKTypeUtility coercedToStringValue:scheme];
-  if (!scheme) {
-    return NO;
-  }
-
-  NSURLComponents *components = [NSURLComponents new];
-  @try {
-    components.scheme = scheme;
-  } @catch (NSException *exception) {
-    NSString *msg = [NSString stringWithFormat:@"Invalid URL scheme provided: %@", scheme];
-    [[self.class loggerType] singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors
-                                       logEntry:msg];
-    return NO;
-  }
-
-  components.path = @"/";
-  return [[UIApplication sharedApplication] canOpenURL:components.URL];
+//  scheme = [FBSDKTypeUtility coercedToStringValue:scheme];
+//  if (!scheme) {
+//    return NO;
+//  }
+//
+//  NSURLComponents *components = [NSURLComponents new];
+//  @try {
+//    components.scheme = scheme;
+//  } @catch (NSException *exception) {
+//    NSString *msg = [NSString stringWithFormat:@"Invalid URL scheme provided: %@", scheme];
+//    [[self.class loggerType] singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors
+//                                       logEntry:msg];
+//    return NO;
+//  }
+//
+//  components.path = @"/";
+//  return [[UIApplication sharedApplication] canOpenURL:components.URL];
+  return NO;
 }
 
 - (void)validateAppID
@@ -510,49 +511,50 @@ static NSMapTable *_transientObjects;
 
 - (UIWindow *)findWindow
 {
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  UIWindow *topWindow = [UIApplication sharedApplication].keyWindow;
-  #pragma clang diagnostic pop
-  if (topWindow == nil || topWindow.windowLevel < UIWindowLevelNormal) {
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-      if (window.windowLevel >= topWindow.windowLevel && !window.isHidden) {
-        topWindow = window;
-      }
-    }
-  }
-
-  if (topWindow != nil) {
-    return topWindow;
-  }
-
-  // Find active key window from UIScene
-  if (@available(iOS 13.0, tvOS 13, *)) {
-    NSSet *scenes = [[UIApplication sharedApplication] valueForKey:@"connectedScenes"];
-    for (id scene in scenes) {
-      id activationState = [scene valueForKeyPath:@"activationState"];
-      BOOL isActive = activationState != nil && [activationState integerValue] == 0;
-      if (isActive) {
-        Class WindowScene = NSClassFromString(@"UIWindowScene");
-        if ([scene isKindOfClass:WindowScene]) {
-          NSArray<UIWindow *> *windows = [scene valueForKeyPath:@"windows"];
-          for (UIWindow *window in windows) {
-            if (window.isKeyWindow) {
-              return window;
-            } else if (window.windowLevel >= topWindow.windowLevel && !window.isHidden) {
-              topWindow = window;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  if (topWindow == nil) {
-    [self.class.loggerType singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors
-                                     logEntry:@"Unable to find a valid UIWindow"];
-  }
-  return topWindow;
+  return nil;
+//  #pragma clang diagnostic push
+//  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//  UIWindow *topWindow = [UIApplication sharedApplication].keyWindow;
+//  #pragma clang diagnostic pop
+//  if (topWindow == nil || topWindow.windowLevel < UIWindowLevelNormal) {
+//    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+//      if (window.windowLevel >= topWindow.windowLevel && !window.isHidden) {
+//        topWindow = window;
+//      }
+//    }
+//  }
+//
+//  if (topWindow != nil) {
+//    return topWindow;
+//  }
+//
+//  // Find active key window from UIScene
+//  if (@available(iOS 13.0, tvOS 13, *)) {
+//    NSSet *scenes = [[UIApplication sharedApplication] valueForKey:@"connectedScenes"];
+//    for (id scene in scenes) {
+//      id activationState = [scene valueForKeyPath:@"activationState"];
+//      BOOL isActive = activationState != nil && [activationState integerValue] == 0;
+//      if (isActive) {
+//        Class WindowScene = NSClassFromString(@"UIWindowScene");
+//        if ([scene isKindOfClass:WindowScene]) {
+//          NSArray<UIWindow *> *windows = [scene valueForKeyPath:@"windows"];
+//          for (UIWindow *window in windows) {
+//            if (window.isKeyWindow) {
+//              return window;
+//            } else if (window.windowLevel >= topWindow.windowLevel && !window.isHidden) {
+//              topWindow = window;
+//            }
+//          }
+//        }
+//      }
+//    }
+//  }
+//
+//  if (topWindow == nil) {
+//    [self.class.loggerType singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors
+//                                     logEntry:@"Unable to find a valid UIWindow"];
+//  }
+//  return topWindow;
 }
 
 - (UIViewController *)topMostViewController

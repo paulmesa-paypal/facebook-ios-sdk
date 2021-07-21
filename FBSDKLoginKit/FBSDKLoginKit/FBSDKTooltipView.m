@@ -515,10 +515,10 @@ static CGMutablePathRef _createCloseCrossGlyphWithRect(CGRect rect)
 {
   // Compute the positioning of the arrow.
   CGRect screenBounds = [UIScreen mainScreen].bounds;
-  UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-  if (!UIInterfaceOrientationIsPortrait(orientation)) {
-    screenBounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
-  }
+//  UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//  if (!UIInterfaceOrientationIsPortrait(orientation)) {
+//    screenBounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
+//  }
   CGFloat arrowHalfWidth = _arrowHeight;
   CGFloat arrowXPos = _positionInView.x - arrowHalfWidth;
   arrowXPos = MAX(arrowXPos, kNUXSideCap + kNUXBubbleMargin);

@@ -253,14 +253,14 @@ static UIApplicationState _applicationState;
 
   [self.appEvents startObservingApplicationLifecycleNotifications];
 
-  [self application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:launchOptions];
+//  [self application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:launchOptions];
 
   // In case of sdk autoInit enabled sdk expects one appDidBecomeActive notification after app launch and has some logic to ignore it.
   // if sdk autoInit disabled app won't receive appDidBecomeActive on app launch and will ignore the first one it gets instead of handling it.
   // Send first applicationDidBecomeActive notification manually
-  if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-    [self applicationDidBecomeActive:nil];
-  }
+//  if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+//    [self applicationDidBecomeActive:nil];
+//  }
 
   [self.featureChecker checkFeature:FBSDKFeatureInstrument completionBlock:^(BOOL enabled) {
     if (enabled) {
@@ -269,7 +269,7 @@ static UIApplicationState _applicationState;
   }];
 
 #if !TARGET_OS_TV
-  [self.backgroundEventLogger logBackgroundRefresStatus:[UIApplication.sharedApplication backgroundRefreshStatus]];
+//  [self.backgroundEventLogger logBackgroundRefresStatus:[UIApplication.sharedApplication backgroundRefreshStatus]];
   // Register Listener for App Link measurement events
   [FBSDKMeasurementEventListener defaultListener];
   [self _logIfAutoAppLinkEnabled];
@@ -668,8 +668,8 @@ static UIApplicationState _applicationState;
   [FBSDKProfile configureWithStore:store
                accessTokenProvider:FBSDKAccessToken.class
                 notificationCenter:NSNotificationCenter.defaultCenter];
-  [FBSDKWebDialogView configureWithWebViewProvider:[FBSDKWebViewFactory new]
-                                         urlOpener:UIApplication.sharedApplication];
+//  [FBSDKWebDialogView configureWithWebViewProvider:[FBSDKWebViewFactory new]
+//                                         urlOpener:UIApplication.sharedApplication];
   [self.appEvents configureNonTVComponentsWithOnDeviceMLModelManager:FBSDKModelManager.shared
                                                      metadataIndexer:FBSDKMetadataIndexer.shared
                                                  skAdNetworkReporter:self.skAdNetworkReporter];

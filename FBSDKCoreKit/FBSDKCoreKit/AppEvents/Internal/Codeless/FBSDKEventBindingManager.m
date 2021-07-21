@@ -208,14 +208,14 @@
 
 - (void)rematchBindings
 {
-  if (0 == self.eventBindings.count) {
-    return;
-  }
-
-  NSArray *windows = [UIApplication sharedApplication].windows;
-  for (UIWindow *window in windows) {
-    [self matchSubviewsIn:window];
-  }
+//  if (0 == self.eventBindings.count) {
+//    return;
+//  }
+//
+//  NSArray *windows = [UIApplication sharedApplication].windows;
+//  for (UIWindow *window in windows) {
+//    [self matchSubviewsIn:window];
+//  }
 }
 
 - (void)matchSubviewsIn:(UIView *)view
