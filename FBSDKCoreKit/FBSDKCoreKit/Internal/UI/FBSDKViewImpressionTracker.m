@@ -79,6 +79,7 @@ static dispatch_once_t token;
                       eventLogger:(id<FBSDKEventLogging>)eventLogger
              notificationObserver:(id<FBSDKNotificationObserving>)notificationObserver
                       tokenWallet:(Class<FBSDKAccessTokenProviding>)tokenWallet
+NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   if ((self = [super init])) {
     _eventName = [eventName copy];

@@ -294,7 +294,7 @@ static FBSDKWebDialog *g_currentDialog = nil;
     return YES;
 }
 
-- (CGRect)_applicationFrameForOrientation
+- (CGRect)_applicationFrameForOrientation NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   CGRect applicationFrame = _dialogView.window.screen.bounds;
 

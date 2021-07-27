@@ -90,7 +90,7 @@ typedef NS_ENUM(NSUInteger, FBSDKAuthenticationSession) {
   id<FBSDKOperatingSystemVersionComparing> _processInfo;
 }
 
-+ (FBSDKBridgeAPI *)sharedInstance
++ (FBSDKBridgeAPI *)sharedInstance NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   static FBSDKBridgeAPI *_sharedInstance;
   static dispatch_once_t onceToken;
@@ -461,7 +461,7 @@ typedef NS_ENUM(NSUInteger, FBSDKAuthenticationSession) {
   }
 }
 
-- (void)setSessionCompletionHandlerFromHandler:(FBSDKSuccessBlock)handler
+- (void)setSessionCompletionHandlerFromHandler:(FBSDKSuccessBlock)handler NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   __weak FBSDKBridgeAPI *weakSelf = self;
   _authenticationSessionCompletionHandler = ^(NSURL *aURL, NSError *error) {
@@ -567,7 +567,7 @@ typedef NS_ENUM(NSUInteger, FBSDKAuthenticationSession) {
  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
  #pragma mark - ASWebAuthenticationPresentationContextProviding
  #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
-- (ASPresentationAnchor)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession *)session API_AVAILABLE(ios(13.0))
+- (ASPresentationAnchor)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession *)session API_AVAILABLE(ios(13.0)) NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
  #else
 - (UIWindow *)presentationAnchorForWebAuthenticationSession:(id<FBSDKAuthenticationSession>)session API_AVAILABLE(ios(11.0)) {

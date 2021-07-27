@@ -349,7 +349,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
   return YES;
 }
 
-- (BOOL)_canAttributeThroughShareSheet
+- (BOOL)_canAttributeThroughShareSheet NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   FBSDKShareDialogValidateAPISchemeRegisteredForCanOpenUrl();
   NSString *scheme = FBSDK_CANOPENURL_FBAPI;
@@ -361,7 +361,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
     || [self _canUseFBShareSheet]);
 }
 
-- (BOOL)_canUseFBShareSheet
+- (BOOL)_canUseFBShareSheet NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanOpenUrl();
   NSURLComponents *components = [NSURLComponents new];
@@ -380,7 +380,7 @@ static inline void FBSDKShareDialogValidateShareExtensionSchemeRegisteredForCanO
   return [self _canUseFBShareSheet] && [self _supportsShareSheetMinimumVersion:FBSDK_SHARE_METHOD_MMP_MIN_VERSION];
 }
 
-- (BOOL)_supportsShareSheetMinimumVersion:(NSString *)minimumVersion
+- (BOOL)_supportsShareSheetMinimumVersion:(NSString *)minimumVersion NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   FBSDKShareDialogValidateAPISchemeRegisteredForCanOpenUrl();
   NSString *scheme = FBSDK_CANOPENURL_FBAPI;

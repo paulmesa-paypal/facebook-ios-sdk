@@ -1346,6 +1346,7 @@ static id<FBSDKAppEventsParameterProcessing, FBSDKEventsProcessing> g_restrictiv
               parameters:(NSDictionary *)parameters
       isImplicitlyLogged:(BOOL)isImplicitlyLogged
              accessToken:(FBSDKAccessToken *)accessToken
+NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   [self validateConfiguration];
 

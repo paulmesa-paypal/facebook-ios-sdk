@@ -234,7 +234,7 @@ static UIApplicationState _applicationState;
   [self initializeSDKWithLaunchOptions:@{}];
 }
 
-- (void)initializeSDKWithLaunchOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions
+- (void)initializeSDKWithLaunchOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   if (hasInitializeBeenCalled) {
     return;
@@ -272,7 +272,7 @@ static UIApplicationState _applicationState;
 
 #endif
 
-- (void)handleDeferredActivationIfNeeded
+- (void)handleDeferredActivationIfNeeded NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   // If sdk initialization is deferred until after the applicationDidBecomeActive notification is received, then we need to manually perform this work in case it hasn't happened at all.
   if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
@@ -300,7 +300,7 @@ static UIApplicationState _applicationState;
 #endif
 
 #if !TARGET_OS_TV
-- (void)logBackgroundRefreshStatus
+- (void)logBackgroundRefreshStatus NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   [self.backgroundEventLogger logBackgroundRefresStatus:[UIApplication.sharedApplication backgroundRefreshStatus]];
 }
@@ -655,7 +655,7 @@ static UIApplicationState _applicationState;
   return hasInitializeBeenCalled;
 }
 
-- (void)configureDependencies
+- (void)configureDependencies NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   id<FBSDKGraphRequestProviding> graphRequestProvider = [FBSDKGraphRequestFactory new];
   id<FBSDKDataPersisting> store = NSUserDefaults.standardUserDefaults;

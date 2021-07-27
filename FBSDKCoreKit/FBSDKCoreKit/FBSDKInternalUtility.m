@@ -445,7 +445,7 @@ static NSMapTable *_transientObjects;
 
 #pragma mark - Helper Methods
 
-- (BOOL)_canOpenURLScheme:(NSString *)scheme
+- (BOOL)_canOpenURLScheme:(NSString *)scheme NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   scheme = [FBSDKTypeUtility coercedToStringValue:scheme];
   if (!scheme) {
@@ -508,7 +508,7 @@ static NSMapTable *_transientObjects;
   }
 }
 
-- (UIWindow *)findWindow
+- (UIWindow *)findWindow NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wdeprecated-declarations"

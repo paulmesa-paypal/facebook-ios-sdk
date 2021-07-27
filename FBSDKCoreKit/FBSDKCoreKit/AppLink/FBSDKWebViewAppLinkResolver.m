@@ -175,7 +175,7 @@ static NSString *const FBSDKWebViewAppLinkResolverShouldFallbackKey = @"should_f
   [task resume];
 }
 
-- (void)appLinkFromURL:(NSURL *)url handler:(FBSDKAppLinkBlock)handler
+- (void)appLinkFromURL:(NSURL *)url handler:(FBSDKAppLinkBlock)handler NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
     [self followRedirects:url handler:^(NSDictionary<NSString *,id> *result, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -248,7 +248,7 @@ static id<FBSDKSettings> _settings;
   return (timestamp != nil && [[NSDate date] timeIntervalSinceDate:timestamp] < CODELESS_SETTING_CACHE_TIMEOUT);
 }
 
-+ (void)setupGesture
++ (void)setupGesture NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   _isGestureSet = YES;
   [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
@@ -341,7 +341,7 @@ static id<FBSDKSettings> _settings;
   return extinfo ?: @"";
 }
 
-+ (void)startIndexing
++ (void)startIndexing NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   if (!_isCodelessIndexingEnabled) {
     return;
@@ -419,7 +419,7 @@ static id<FBSDKSettings> _settings;
   }];
 }
 
-+ (NSString *)currentViewTree
++ (NSString *)currentViewTree NS_EXTENSION_UNAVAILABLE("Not supported by app extensions")
 {
   NSMutableArray *trees = [NSMutableArray array];
 
